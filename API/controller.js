@@ -1,4 +1,4 @@
-var ConnectionFactory = require('../ConnectionFactory.js');
+var ConnectionFactory = require('./ConnectionFactory.js');
 var connection = new ConnectionFactory();
 
 exports.getPlaylist = async function (req, res) {

@@ -1,18 +1,13 @@
 const mysql = require('mysql');
-// const connection = mysql.createConnection({
-//     host: "remotemysql.com",
-//     port: "3306",
-//     user: "pi7Zx5vX2K",
-//     password: "7nacCngSQW",
-//     database: "pi7Zx5vX2K"
-// });
+
+var db = require('db_config');
 
 var db_config = {
-    host: "remotemysql.com",
-    port: "3306",
-    user: "pi7Zx5vX2K",
-    password: "7nacCngSQW",
-    database: "pi7Zx5vX2K"
+    host: db.HOST,
+    port: db.PORT,
+    user: db.USER
+    password: db.PASSWORD,
+    database: db.DATABASE
 };
 
 var connection;

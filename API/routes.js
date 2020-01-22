@@ -1,5 +1,5 @@
 module.exports = function(app) {
-    var controller = require('../controllers/controller');
+    var controller = require('./controller');
 
     // Routes
     app.route('/')
