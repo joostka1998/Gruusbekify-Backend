@@ -1,11 +1,11 @@
 module.exports = function(app) {
-    var playlistController = require('../controllers/playlistController');
+    var controller = require('../controllers/controller');
 
     // Routes
     app.route('/')
-        .get(res.status(200).send('Welkom op de API van gruusbekify'));
+        .get(controller.defaultRoute);
 
     app.route('/playlist/:id')
-        .get(playlistController.getPlaylist);
+        .get(controller.getPlaylist);
 
 };

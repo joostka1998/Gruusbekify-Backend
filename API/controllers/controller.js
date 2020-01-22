@@ -9,3 +9,11 @@ exports.getPlaylist = async function (req, res) {
         console.log(err);
     }
 };
+
+exports.defaultRoute = async function (req, res) {
+    try {
+        res.status(200).send('Welkom op de API van gruusbekify');
+    } catch (err) {
+        console.log(err);
+    }
+};
