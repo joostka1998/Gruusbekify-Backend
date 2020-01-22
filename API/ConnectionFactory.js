@@ -1,14 +1,21 @@
 const mysql = require('mysql');
 
-var db = require('db_config');
+// var db = require('db_config');
 
 var db_config = {
-    host: db.HOST,
-    port: db.PORT,
-    user: db.USER,
-    password: db.PASSWORD,
-    database: db.DATABASE
-};
+    // host: db.HOST,
+    // port: db.PORT,
+    // user: db.USER,
+    // password: db.PASSWORD,
+    // database: db.DATABASE
+
+    host: process.env.HOST,
+    port: process.env.PORT,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE
+
+    };
 
 var connection;
 var numberOfRestarts = 0;

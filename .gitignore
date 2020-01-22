@@ -79,3 +79,4 @@ build/Release
 node_modules
 
 API/db_config.js
+API/.idea/
