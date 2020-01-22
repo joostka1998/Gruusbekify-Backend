@@ -5,7 +5,7 @@ var db = require('db_config');
 var db_config = {
     host: db.HOST,
     port: db.PORT,
-    user: db.USER
+    user: db.USER,
     password: db.PASSWORD,
     database: db.DATABASE
 };
