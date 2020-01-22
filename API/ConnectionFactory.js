@@ -38,6 +38,11 @@ module.exports = class ConnectionFactory {
         connection.connect(function(err) {
             if(err) {
                 console.log('error when connecting to db:', err);
+                console.log(process.env.HOST);
+                console.log(process.env.PORT);
+                console.log(process.env.USER);
+                console.log(process.env.PASSWORD);
+                console.log(process.env.DATABASE);
                 setTimeout(self.connectAndHandleDisconnect, 2000);
             }
         });
