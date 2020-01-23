@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 
-// var db = require('db_config');
+// var db = require('./db_config.js');
 
 var db_config = {
     // host: db.HOST,
@@ -38,11 +38,6 @@ module.exports = class ConnectionFactory {
         connection.connect(function(err) {
             if(err) {
                 console.log('error when connecting to db:', err);
-                console.log(process.env.HOST);
-                console.log(process.env.PORTO);
-                console.log(process.env.USER);
-                console.log(process.env.PASSWORD);
-                console.log(process.env.DATABASE);
                 setTimeout(self.connectAndHandleDisconnect, 2000);
             }
         });
