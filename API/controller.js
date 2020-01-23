@@ -22,6 +22,19 @@ exports.getPlaylist = async function (req, res) {
     }
 };
 
+exports.getPlaylistContent = async function (req, res) {
+    try {
+        if(!isNaN(parseInt(req.params.id))) {
+            result = await connection.executeQuery('SELECT * FROM PlaylistInhoud WHERE PlaylistID = ' + req.params.id);
+            res.status(200).send(result);
+        } else {
+            res.status(400).send();
+        }
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 exports.getSchlager = async function (req, res) {
     try {
         if(!isNaN(parseInt(req.params.id))) {

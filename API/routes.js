@@ -8,6 +8,9 @@ module.exports = function(app) {
     app.route('/playlist/:id')
         .get(controller.getPlaylist);
 
+    app.route('/playlistcontent/:id')
+        .get(controller.getPlaylistContent);
+
     app.route('/schlager/:id')
         .get(controller.getSchlager);
 
