@@ -10,7 +10,7 @@ var db_config = {
     // database: db.DATABASE
 
     host: process.env.HOST,
-    port: process.env.PORT,
+    port: process.env.PORTO,
     user: process.env.USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE
@@ -39,7 +39,7 @@ module.exports = class ConnectionFactory {
             if(err) {
                 console.log('error when connecting to db:', err);
                 console.log(process.env.HOST);
-                console.log(process.env.PORT);
+                console.log(process.env.PORTO);
                 console.log(process.env.USER);
                 console.log(process.env.PASSWORD);
                 console.log(process.env.DATABASE);
