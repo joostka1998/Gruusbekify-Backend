@@ -1,33 +1,28 @@
 const mysql = require('mysql');
 
-// var db = require('./db_config.js');
+var db = require('./db_config.js');
 
 var db_config = {
-    // host: db.HOST,
-    // port: db.PORT,
-    // user: db.USER,
-    // password: db.PASSWORD,
-    // database: db.DATABASE
+    host: db.HOST,
+    port: db.PORT,
+    user: db.USER,
+    password: db.PASSWORD,
+    database: db.DATABASE
 
-    host: process.env.HOST,
-    port: process.env.PORTO,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
+    // host: process.env.HOST,
+    // port: process.env.PORTO, // PORT is already taken by heroku standard environment variables.
+    // user: process.env.USER,
+    // password: process.env.PASSWORD,
+    // database: process.env.DATABASE
 
     };
 
 var connection;
-var numberOfRestarts = 0;
 
 module.exports = class ConnectionFactory {
 
     constructor() {
         this.connectAndHandleDisconnect();
-        // this.openConnection();
-        // setInterval(function () {
-        //     connection.query('SELECT 1');
-        // }, 5000);
     }
 
     connectAndHandleDisconnect() {
@@ -43,36 +38,11 @@ module.exports = class ConnectionFactory {
         });
 
         connection.on('error', function(err) {
-            console.log('db error', err);
             if(err.code === 'PROTOCOL_CONNECTION_LOST') {
-                numberOfRestarts ++;
-                console.log('Disconnect happened for the: ' + numberOfRestarts + ' time...');
                 self.connectAndHandleDisconnect();
             } else {
                 throw err;
             }
-        });
-    }
-
-    // connect to mysql
-    openConnection() {
-        connection.connect(function(err) {
-            // in case of error
-            if(err) {
-                console.log('Error opening connection: ' + err);
-            }
-            console.log('Connection opened');
-        });
-    };
-
-    // Close the connection
-    closeConnection() {
-        connection.end(function(err){
-            if(err) {
-                console.log('Error closing connection: ' + err);
-                //connection.destroy();
-            }
-            console.log('Connection closed');
         });
     }
 
