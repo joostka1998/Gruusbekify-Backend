@@ -5,8 +5,11 @@ module.exports = function(app) {
     app.route('/')
         .get(controller.defaultRoute);
 
-    app.route('/playlist')
+    app.route('/createPlaylist')
         .post(controller.createPlaylist);
+
+    app.route('/deletePlaylist')
+        .post(controller.deletePlaylist);
 
     app.route('/playlist/:id')
         .get(controller.getPlaylist);
@@ -14,13 +17,16 @@ module.exports = function(app) {
     app.route('/addSchlager')
         .post(controller.addSchlagerToPlaylist);
 
+    app.route('/removeSchlager')
+        .post(controller.removeSchlagerFromPlaylist);
+
     app.route('/playlistcontent/:id')
         .get(controller.getPlaylistContent);
 
     app.route('/schlager/:id')
         .get(controller.getSchlager);
 
-    app.route('/user')
-        .get(controller.userTest);
+    // app.route('/user')
+    //     .get(controller.userTest);
 
 };

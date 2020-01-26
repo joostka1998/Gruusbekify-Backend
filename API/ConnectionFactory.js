@@ -1,19 +1,19 @@
 const mysql = require('mysql');
 
-// var db = require('./db_config.js');
+var db = require('./db_config.js');
 
 var db_config = {
-    // host: db.HOST,
-    // port: db.PORT,
-    // user: db.USER,
-    // password: db.PASSWORD,
-    // database: db.DATABASE
+    host: db.HOST,
+    port: db.PORT,
+    user: db.USER,
+    password: db.PASSWORD,
+    database: db.DATABASE
 
-    host: process.env.HOST,
-    port: process.env.PORTO, // PORT is already taken by heroku standard environment variables.
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
+    // host: process.env.HOST,
+    // port: process.env.PORTO, // PORT is already taken by heroku standard environment variables.
+    // user: process.env.USER,
+    // password: process.env.PASSWORD,
+    // database: process.env.DATABASE
 
     };
 
