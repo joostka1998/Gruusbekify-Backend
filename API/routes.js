@@ -21,12 +21,9 @@ module.exports = function(app) {
         .post(controller.removeSchlagerFromPlaylist);
 
     app.route('/playlistcontent/:id')
-        .get(controller.getPlaylistContent);
+        .post(controller.getPlaylistContent);
 
     app.route('/schlager/:id')
         .get(controller.getSchlager);
-
-    // app.route('/user')
-    //     .get(controller.userTest);
 
 };

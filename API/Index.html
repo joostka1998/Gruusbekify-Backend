@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gruusbekify API</title>
+</head>
+<body>
+<h1>Gruusbekify API</h1>
+<h2>Endpoints:</h2>
+
+<ul>
+    <li>/createPlaylist</li>
+    <p>Post request</p>
+    <p>parameters:</p>
+    <ol>
+        <li>userID</li>
+        <li>accessToken (user recieves this when logging in with facebook)</li>
+        <li>name</li>
+    </ol>
+
+    <br/>
+    <br/>
+
+    <li>/deletePlaylist</li>
+    <p>Post request</p>
+    <p>parameters:</p>
+    <ol>
+        <li>userID</li>
+        <li>accessToken (user recieves this when logging in with facebook)</li>
+        <li>playlistID</li>
+    </ol>
+
+    <br/>
+    <br/>
+
+    <li>/playlist/:id</li>
+    <h4>TODO</h4>
+
+    <br/>
+    <br/>
+
+    <li>/addSchlager</li>
+    <p>Post request</p>
+    <p>parameters:</p>
+    <ol>
+        <li>userID</li>
+        <li>accessToken (user recieves this when logging in with facebook)</li>
+        <li>playlistID</li>
+        <li>schlagerID</li>
+        <li>positieInLijst</li>
+    </ol>
+
+    <br/>
+    <br/>
+
+    <li>/removeSchlager</li>
+    <p>Post request</p>
+    <p>parameters:</p>
+    <ol>
+        <li>userID</li>
+        <li>accessToken (user recieves this when logging in with facebook)</li>
+        <li>playlistID</li>
+        <li>schlagerID</li>
+    </ol>
+
+    <br/>
+    <br/>
+
+    <li>/playlistcontent/:id</li>
+    <p>Post request</p>
+    <p>parameters:</p>
+    <ol>
+        <li>userID</li>
+        <li>accessToken (user recieves this when logging in with facebook)</li>
+    </ol>
+
+    <br/>
+    <br/>
+
+    <li>/schlager/:id</li>
+    <p>Get request (Not used in current front-end)</p>
+</ul>
+</body>
+</html>

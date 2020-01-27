@@ -4,9 +4,11 @@ var connection = new ConnectionFactory();
 var UserValidator = require('./UserValidator.js');
 var validator = new UserValidator();
 
+var path = require('path');
+
 exports.defaultRoute = function (req, res) {
     try {
-        res.status(200).send('Dit is de API van gruusbekify, probeer niks te slopen plz');
+        res.status(200).sendFile(path.join(__dirname + '/Index.html'));
     } catch (err) {
         res.status(500).send();
         console.log(err);
@@ -15,7 +17,7 @@ exports.defaultRoute = function (req, res) {
 
 exports.getPlaylist = async function (req, res) {
     try {
-        if(!isNaN(parseInt(req.params.id))) {
+        if (!isNaN(parseInt(req.params.id))) {
             result = await connection.executeQuery('SELECT * FROM Playlists WHERE PlaylistID = ' + req.params.id);
             res.status(200).send(result);
         } else {
@@ -65,9 +67,20 @@ exports.deletePlaylist = async function (req, res) {
 
 exports.getPlaylistContent = async function (req, res) {
     try {
-        if(!isNaN(parseInt(req.params.id))) {
-            result = await connection.executeQuery('SELECT * FROM PlaylistInhoud WHERE PlaylistID = ' + req.params.id);
-            res.status(200).send(result);
+        if (!isNaN(parseInt(req.params.id))) {
+            isUserAuthenticated = await validator.validateUser(req.body.userID.toString(), req.body.accessToken.toString());
+            if (isUserAuthenticated) {
+                isUserAllowed = await connection.executeQuery(`SELECT 1 FROM Playlists WHERE (PlaylistID = \'${req.params.id.toString()}\' AND UserID = \'${req.body.userID.toString()}\') OR (Public = 1)`);
+                console.log(isUserAllowed);
+                if (isUserAllowed[0]['1'] == 1) {
+                    result = await connection.executeQuery('SELECT S.SchlagerTitel, S.SchlagerArtiest, S.SchlagerAudioLocatie, S.SchlagerCoverLocatie, S.SchlagerAlbum FROM PlaylistInhoud PI JOIN Schlagers S ON PI.SchlagerID = S.SchlagerID WHERE PI.PlaylistID = ' + req.params.id);
+                    res.status(200).send(result);
+                } else {
+                    res.status(403).send();
+                }
+            } else {
+                res.status(401).send();
+            }
         } else {
             res.status(400).send();
         }
@@ -79,7 +92,7 @@ exports.getPlaylistContent = async function (req, res) {
 
 exports.getSchlager = async function (req, res) {
     try {
-        if(!isNaN(parseInt(req.params.id))) {
+        if (!isNaN(parseInt(req.params.id))) {
             result = await connection.executeQuery('SELECT * FROM Schlagers WHERE SchlagerID = ' + req.params.id);
             res.status(200).send(result);
         } else {
@@ -130,14 +143,3 @@ exports.removeSchlagerFromPlaylist = async function (req, res) {
         console.log(err);
     }
 };
-
-// exports.userTest = async function (req, res) {
-//     try {
-//         isUserAuthenticated = await validator.validateUser('1458063457692850', 'EAAH0VA1kwqwBAClZCR0Jz4hTDXfNV7ZA75mwFpXZCupBNQMNnZABGhhG8PnZARE6OrTag9gKZCLTOjZAbpf6PsLtvILXM7Kb6wweDdzURMRzafjKTxRDvuUuRHrKCgkYZByzJ2XW4C1bv1u4vlZCvkAi5hKUeN40AXCifn8zvulCD57DUpjQBkXAoGNJKycxE0tVUbLCcWuZCv3AZDZD');
-//         res.status(200).send(isUserAuthenticated);
-//     } catch (err) {
-//         res.status(500).send();
-//         console.log(err);
-//     }
-// };
-
