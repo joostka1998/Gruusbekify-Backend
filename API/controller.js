@@ -18,8 +18,18 @@ exports.defaultRoute = function (req, res) {
 exports.getPlaylist = async function (req, res) {
     try {
         if (!isNaN(parseInt(req.params.id))) {
-            result = await connection.executeQuery('SELECT * FROM Playlists WHERE PlaylistID = ' + req.params.id);
-            res.status(200).send(result);
+            isUserAuthenticated = await validator.validateUser(req.body.userID.toString(), req.body.accessToken.toString());
+            if (isUserAuthenticated) {
+                isUserAllowed = await connection.executeQuery(`SELECT 1 FROM Playlists WHERE (PlaylistID = \'${req.params.id.toString()}\' AND UserID = \'${req.body.userID.toString()}\') OR (Public = 1)`);
+                if (isUserAllowed[0]['1'] == 1) {
+                    result = await connection.executeQuery('SELECT * FROM Playlists WHERE PlaylistID = ' + req.params.id);
+                    res.status(200).send(result);
+                } else {
+                    res.status(403).send();
+                }
+            } else {
+                res.status(401).send();
+            }
         } else {
             res.status(400).send();
         }
@@ -71,7 +81,6 @@ exports.getPlaylistContent = async function (req, res) {
             isUserAuthenticated = await validator.validateUser(req.body.userID.toString(), req.body.accessToken.toString());
             if (isUserAuthenticated) {
                 isUserAllowed = await connection.executeQuery(`SELECT 1 FROM Playlists WHERE (PlaylistID = \'${req.params.id.toString()}\' AND UserID = \'${req.body.userID.toString()}\') OR (Public = 1)`);
-                console.log(isUserAllowed);
                 if (isUserAllowed[0]['1'] == 1) {
                     result = await connection.executeQuery('SELECT S.SchlagerTitel, S.SchlagerArtiest, S.SchlagerAudioLocatie, S.SchlagerCoverLocatie, S.SchlagerAlbum FROM PlaylistInhoud PI JOIN Schlagers S ON PI.SchlagerID = S.SchlagerID WHERE PI.PlaylistID = ' + req.params.id);
                     res.status(200).send(result);

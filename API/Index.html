@@ -10,7 +10,7 @@
 
 <ul>
     <li>/createPlaylist</li>
-    <p>Post request</p>
+    <p>Post request (header = Content-Type:application/x-www-form-urlencoded)</p>
     <p>parameters:</p>
     <ol>
         <li>userID</li>
@@ -22,7 +22,7 @@
     <br/>
 
     <li>/deletePlaylist</li>
-    <p>Post request</p>
+    <p>Post request (header = Content-Type:application/x-www-form-urlencoded)</p>
     <p>parameters:</p>
     <ol>
         <li>userID</li>
@@ -34,13 +34,18 @@
     <br/>
 
     <li>/playlist/:id</li>
-    <h4>TODO</h4>
+    <p>Post request (header = Content-Type:application/x-www-form-urlencoded)</p>
+    <p>parameters:</p>
+    <ol>
+        <li>userID</li>
+        <li>accessToken (user recieves this when logging in with facebook)</li>
+    </ol>
 
     <br/>
     <br/>
 
     <li>/addSchlager</li>
-    <p>Post request</p>
+    <p>Post request (header = Content-Type:application/x-www-form-urlencoded)</p>
     <p>parameters:</p>
     <ol>
         <li>userID</li>
@@ -54,7 +59,7 @@
     <br/>
 
     <li>/removeSchlager</li>
-    <p>Post request</p>
+    <p>Post request (header = Content-Type:application/x-www-form-urlencoded)</p>
     <p>parameters:</p>
     <ol>
         <li>userID</li>
@@ -67,7 +72,7 @@
     <br/>
 
     <li>/playlistcontent/:id</li>
-    <p>Post request</p>
+    <p>Post request (header = Content-Type:application/x-www-form-urlencoded)</p>
     <p>parameters:</p>
     <ol>
         <li>userID</li>

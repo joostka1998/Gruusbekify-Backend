@@ -12,7 +12,7 @@ module.exports = function(app) {
         .post(controller.deletePlaylist);
 
     app.route('/playlist/:id')
-        .get(controller.getPlaylist);
+        .post(controller.getPlaylist);
 
     app.route('/addSchlager')
         .post(controller.addSchlagerToPlaylist);
